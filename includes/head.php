@@ -1,0 +1,5 @@
+<!-- GLOBAL content of the <head> tag -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title><?= $TITLE ?></title>
+<link rel="stylesheet" href="<?= $ROOT . "assets/css/style.css" ?>" />

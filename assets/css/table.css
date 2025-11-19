@@ -1,3 +1,8 @@
+/*
+Specific CSS for the table in index.php
+*/
+
+/* Color classes used to for "Stock faible" and "Rupture de stock" string */
 .orange {
     color: orange;
 }

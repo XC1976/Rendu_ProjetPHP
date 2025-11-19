@@ -1,49 +1,37 @@
+<?php
+    // GLOBAL variables
+    
+    // ROOT path
+    $ROOT = "";
+    // <title> content
+    $TITLE = "Page d'accueil";
+?>
+
+<?php require "includes/productsList.php"; ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Exercice 1</title>
-	<script src="script.js" defer></script>
-	<link rel="stylesheet" href="style.css" />
+    <!--Include with the GLOBAL content shared with all the <head> on every page-->
+    <?php require "includes/head.php"; ?>
+
+	<link rel="stylesheet" href="<?= $ROOT . "assets/css/table.css" ?>" />
+	<script src="<?= $ROOT . "assets/js/tablePurchase.js" ?>" defer></script>
 </head>
 <body>
-    <?php $produits = [
-        [
-            "nom" => "Pomme",
-            "prix" => 200,
-            "origine" => "France",
-            "stock" => 10,
-        ],
-        [
-            "nom" => "Banane",
-            "prix" => 150,
-            "origine" => "Côte Ivoire",
-            "stock" => 5,
-        ],
-        [
-            "nom" => "Mangue",
-            "prix" => 300,
-            "origine" => "Sénégal",
-            "stock" => 2,
-        ],
-        [
-            "nom" => "Test stock 0",
-            "prix" => 300,
-            "origine" => "Sénégal",
-            "stock" => 0,
-        ],
-    ]; ?>
 
+<!-- Table for the first iteration (2025-11-19) of this project -->
 <table>
     <tr>
         <th>Nom</th>
         <th>Prix</th>
         <th>Origine</th>
         <th>Stock</th>
-        <th>Achat</th>
-        <th>Achat (en JS)</th>
+        <th>Achat (PHP $_POST)</th>
+        <th>Achat (JS $_GET)</th>
     </tr>
+    
+    <!-- foreach statement to generate a custom button or input-->
     <?php foreach ($produits as $value): ?>
 
         <tr>
@@ -51,18 +39,18 @@
             <td><?= $value["prix"] ?></td>
             <td><?= $value["origine"] ?></td>
 
-            <!--Si stock == 0, alors affiche "rupture de stock" en rouge
-            Si stock < 3, afficher "stock faible" en orange-->
+            <!--if stock == 0, "rupture de stock" appears as red
+            if stock < 3, "stock faible" appears as orange-->
 
             <?php if ($value["stock"] === 0): ?>
                 <td class="red"><?= "Rupture de stock" ?></td>
             <?php elseif ($value["stock"] < 3): ?>
-                <td class="orange"><?= "Stock faible" ?></td>
+                <td class="orange"><?= "Stock faible (" . $value['stock'] . ')' ?></td>
             <?php else: ?>
                 <td><?= $value["stock"] ?></td>
             <?php endif; ?>
 
-            <!--Bouton individuels pour envoyer les informations en PHP -->
+            <!--Individual button to send the required information in PHP using input type="hidden" -->
             <td>
                 <form action="pageAchat.php" method="POST">
 
@@ -83,12 +71,17 @@
                         htmlspecialchars($value["nom"]) ?>"/>
                 </form>
             </td>
-
+            
+            <!-- Individual button to send the required information with JS using $_GET variables -->
             <td>
-                <button onclick="buttonClicked('<?= $value['nom']; ?>', '<?= $value['prix']; ?>', '<?= $value['origine']; ?>', '<?= $value['stock']; ?>')"><?= 'Acheter : ' . $value['nom'];?></button>
+                <button onclick="buttonClicked('<?= $value[
+                    "nom"
+                ] ?>', '<?= $value["prix"] ?>',
+                '<?= $value["origine"] ?>',
+                '<?= $value["stock"] ?>')">
+                <?= "Acheter : " . $value["nom"] ?>
+                </button>
             </td>
-
-
         </tr>
     <?php endforeach; ?>
 </table>
