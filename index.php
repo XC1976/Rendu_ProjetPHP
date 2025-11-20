@@ -40,9 +40,9 @@ $TITLE = "Page d'accueil";
         </script>
         
     <?php if($_SESSION['res'] == 1): ?>
-        <p class="green">Vous avez gagné</p>
+        <p class="green">Vous avez gagné (numéro de l'ordinateur : <?= $_SESSION['number']; ?>)</p>
     <?php else: ?>
-        <p class="red">Vous avez perdu</p>
+        <p class="red">Vous avez perdu (numéro de l'ordinateur : <?= $_SESSION['number']; ?>)</p>
     <?php endif; ?>
 <?php endif; ?>
 

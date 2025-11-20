@@ -4,6 +4,8 @@ session_start();
 function jouer_pari(int $userNumChoice) {
     $randNumber = rand(1, 10);
 
+    $_SESSION['number'] = $randNumber;
+
     return ($randNumber == $userNumChoice) ? true : false;
 }
 
