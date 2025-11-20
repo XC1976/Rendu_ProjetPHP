@@ -1,13 +1,12 @@
 <?php
-    // GLOBAL variables
-    
-    // ROOT path
-    $ROOT = "";
-    // <title> content
-    $TITLE = "Page d'accueil";
-?>
+session_start();
+// GLOBAL variables
 
-<?php require "includes/productsList.php"; ?>
+// ROOT path
+$ROOT = "";
+// <title> content
+$TITLE = "Page d'accueil";
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -15,77 +14,39 @@
     <!--Include with the GLOBAL content shared with all the <head> on every page-->
     <?php require "includes/head.php"; ?>
 
-	<link rel="stylesheet" href="<?= $ROOT . "assets/css/table.css" ?>" />
-	<script src="<?= $ROOT . "assets/js/tablePurchase.js" ?>" defer></script>
 </head>
 <body>
 
-<!-- Table for the first iteration (2025-11-19) of this project -->
-<table>
-    <tr>
-        <th>Nom</th>
-        <th>Prix</th>
-        <th>Origine</th>
-        <th>Stock</th>
-        <th>Achat (PHP $_POST)</th>
-        <th>Achat (JS $_GET)</th>
-    </tr>
-    
-    <!-- foreach statement to generate a custom button or input-->
-    <?php foreach ($produits as $value): ?>
+<h2>Rendu 2 2025-11-20</h2>
 
-        <tr>
-            <td><?= $value["nom"] ?></td>
-            <td><?= $value["prix"] ?></td>
-            <td><?= $value["origine"] ?></td>
+<form method="POST" action="actions/pari.php">
+    <label for="userNumber">Choisir un nombre entre 1 et 10</label>
+    <input type="number" min="1" max="10" id="userNumber" name="userNumber" value="1" required/>
 
-            <!--if stock == 0, "rupture de stock" appears as red
-            if stock < 3, "stock faible" appears as orange-->
+    <input type="submit" name="submit" value="Parier" id="submit" onclick="playSound()" />
+    <link rel="stylesheet" href="assets/css/pari.css" />
+</form>
 
-            <?php if ($value["stock"] === 0): ?>
-                <td class="red"><?= "Rupture de stock" ?></td>
-            <?php elseif ($value["stock"] < 3): ?>
-                <td class="orange"><?= "Stock faible (" . $value['stock'] . ')' ?></td>
-            <?php else: ?>
-                <td><?= $value["stock"] ?></td>
-            <?php endif; ?>
+<?php if (isset($_SESSION["res"])): ?>
+    <script defer>
+        let soundWin = new Audio("assets/sound/win.mp3");
+        let soundLose = new Audio("assets/sound/lose.mp3");
 
-            <!--Individual button to send the required information in PHP using input type="hidden" -->
-            <td>
-                <form action="pageAchat.php" method="POST">
+        if(<?= $_SESSION["res"]; ?> == 0) {
+          soundLose.play();
+        } else {
+          soundWin.play();
+        }
+        </script>
+        
+    <?php if($_SESSION['res'] == 1): ?>
+        <p class="green">Vous avez gagné</p>
+    <?php else: ?>
+        <p class="red">Vous avez perdu</p>
+    <?php endif; ?>
+<?php endif; ?>
 
-                    <input type="hidden" name="nom" value="<?= htmlspecialchars(
-                        $value["nom"],
-                    ) ?>">
-                    <input type="hidden" name="prix" value="<?= htmlspecialchars(
-                        $value["prix"],
-                    ) ?>">
-                    <input type="hidden" name="origine" value="<?= htmlspecialchars(
-                        $value["origine"],
-                    ) ?>">
-                    <input type="hidden" name="stock" value="<?= htmlspecialchars(
-                        $value["stock"],
-                    ) ?>">
+<input type="hidden" id="hidden" value="5" />
 
-                    <input type="submit" name="submit" value="<?= "Acheter : " .
-                        htmlspecialchars($value["nom"]) ?>"/>
-                </form>
-            </td>
-            
-            <!-- Individual button to send the required information with JS using $_GET variables -->
-            <td>
-                <button onclick="buttonClicked('<?= $value[
-                    "nom"
-                ] ?>', '<?= $value["prix"] ?>',
-                '<?= $value["origine"] ?>',
-                '<?= $value["stock"] ?>')">
-                <?= "Acheter : " . $value["nom"] ?>
-                </button>
-            </td>
-        </tr>
-    <?php endforeach; ?>
-</table>
 </body>
-
-
 </html>

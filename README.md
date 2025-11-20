@@ -2,8 +2,9 @@
 
 ## CHAN Kyle BTC 28.1
 
-- master : Latest (Rendu 1 ==> 2025-11-19)
+- master : Latest (Rendu 2 ==> 2025-11-20)
 - rendu1 : Snapshot rendu du 2025-11-19
+- rendu2 : Snapshot rendu du 2025-11-20
 
 Rough general architecture
 
