@@ -1,4 +1,4 @@
-# Rendu et historique du mini projet PHP
+# Historique des rendus PHP
 
 ## CHAN Kyle BTC 28.1
 

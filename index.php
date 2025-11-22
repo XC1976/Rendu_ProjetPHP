@@ -14,6 +14,7 @@
     <main>
         <h1>Le combat des créatures</h1>
 
+        <!-- Flexbox of the 2 entities -->
         <div class="entitiesContainer">
             <div class="entity">
                     <h2>Dragon Rouge</h2>
@@ -56,6 +57,7 @@
             </div>
         </div>
 
+        <!-- Flexbox of the interactions button -->
         <div class="btnsContainer">
             <div class="buttonDragon">
                 <form action="#" method="POST">
@@ -86,6 +88,7 @@
             </div>
         </div>
 
+        <!-- The log of the actions of this SESSION -->
     	<div class="journal">
     	    <h3>Journal du combat</h3>
     	    <ul>
@@ -95,12 +98,14 @@
     		</ul>
     	</div>
 
+        <!-- Message shown when one or the other is defeated -->
         <?php if ($_SESSION["redDragon"]->health == 0): ?>
             <p class="victor"><span class="bold">Golem de pierre</span> est le grand vainqueur !</p>
         <?php elseif ($_SESSION["stoneGolem"]->health == 0): ?>
             <p class="victor"><span class="bold">Dragon rouge</span> est le grand vainqueur !</p>
         <?php endif; ?>
 
+        <!-- Miscellaneous footer -->
         <footer>
             <p>Que le meilleur gagne entre ces créatures légendaires !</p>
         </footer>
