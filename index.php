@@ -11,72 +11,91 @@
 </head>
 <body>
 
-    <h1>Le combat des créatures</h1>
+    <main>
+        <h1>Le combat des créatures</h1>
 
-    <h2>Dragon Rouge</h2>
-    <?= "<p>" .
-        $_SESSION["redDragon"]->health .
-        " / " .
-        $_SESSION["redDragon"]->originalHealth .
-        "</p>" ?>
+        <div class="entitiesContainer">
+            <div class="entity">
+                    <h2>Dragon Rouge</h2>
+                    <?= "<p>" .
+                        $_SESSION["redDragon"]->health .
+                        " / " .
+                        $_SESSION["redDragon"]->originalHealth .
+                        " PV" .
+                        "</p>" ?>
 
-    <?php if ($_SESSION["redDragon"]->health == 0): ?>
-        <p>K.O</p>
-    <?php else: ?>
-        <p>En combat</p>
-    <?php endif; ?>
+                    <?php if ($_SESSION["redDragon"]->health == 0): ?>
+                        <p class="red">K.O</p>
+                    <?php else: ?>
+                        <p class="green">En combat</p>
+                    <?php endif; ?>
+            </div>
 
-    <form action="#" method="POST">
-        <?php if (
-            ($_SESSION["redDragon"]->health &&
-                $_SESSION["stoneGolem"]->health) != 0
-        ): ?>
-    	    <button type="submit" name="dragonAttack" id="dragonAttack">Dragon Rouge attaque</button>
-		<?php endif; ?>
-	</form>
 
-    <h2>Golem de Pierre</h2>
-    <?= "<p>" .
-        $_SESSION["stoneGolem"]->health .
-        " / " .
-        $_SESSION["stoneGolem"]->originalHealth .
-        "</p>" ?>
-    <?php if ($_SESSION["stoneGolem"]->health == 0): ?>
-        <p>K.O</p>
-    <?php else: ?>
-        <p>En combat</p>
-    <?php endif; ?>
+            <div class="entity">
+                <h2>Golem de Pierre</h2>
+                <?= "<p>" .
+                    $_SESSION["stoneGolem"]->health .
+                    " / " .
+                    $_SESSION["stoneGolem"]->originalHealth .
+                    " PV" .
+                    "</p>" ?>
+                <?php if ($_SESSION["stoneGolem"]->health == 0): ?>
+                    <p class="red">K.O</p>
+                <?php else: ?>
+                    <p class="green">En combat</p>
+                <?php endif; ?>
+            </div>
+        </div>
 
-    <form action="#" method="POST">
-        <?php if (
-            ($_SESSION["redDragon"]->health &&
-                $_SESSION["stoneGolem"]->health) != 0
-        ): ?>
-    	    <button type="submit" name="golemAttack" id="golemAttack">Golem de Pierre attaque</button>
-		<?php endif; ?>
-	</form>
+        <div class="btnsContainer">
+            <div class="buttonDragon">
+                <form action="#" method="POST">
+                    <?php if (
+                        ($_SESSION["redDragon"]->health &&
+                            $_SESSION["stoneGolem"]->health) != 0
+                    ): ?>
+               	    <button type="submit" name="dragonAttack" id="dragonAttack">Dragon Rouge attaque</button>
+          		<?php endif; ?>
+            </div>
 
-	<form action="#" method="POST">
-        <button type="submit" name="restart" id="restart">Recommencer le combat</button>
-	</form>
+           <div class="buttonGolem">
+               	</form>
+                    <form action="#" method="POST">
+                        <?php if (
+                            ($_SESSION["redDragon"]->health &&
+                                $_SESSION["stoneGolem"]->health) != 0
+                        ): ?>
+                   	    <button type="submit" name="golemAttack" id="golemAttack">Golem de Pierre attaque</button>
+              		<?php endif; ?>
+               	</form>
+           </div>
 
-	<div>
-	    <h3>Journal du combat</h3>
-	    <ul>
-	    <?php foreach ($_SESSION["messages"] as $message): ?>
-			<li><?= htmlspecialchars($message) ?></li>
-		<?php endforeach; ?>
-		</ul>
-	</div>
+            <div class="buttonRestart">
+               	<form action="#" method="POST">
+                        <button type="submit" name="restart" id="restart">Recommencer le combat</button>
+               	</form>
+            </div>
+        </div>
 
-    <?php if ($_SESSION["redDragon"]->health == 0): ?>
-        <p>Le golem de pierre est le grand vainqueur !</p>
-    <?php elseif ($_SESSION["stoneGolem"]->health == 0): ?>
-        <p>Le dragon rouge est le grand vainqueur !</p>
-    <?php endif; ?>
-    
-    <footer>
-        <p>Que le meilleur gagne entre ces créatures légendaires !</p>
-    </footer>
+    	<div class="journal">
+    	    <h3>Journal du combat</h3>
+    	    <ul>
+    	    <?php foreach ($_SESSION["messages"] as $message): ?>
+    			<li><?= htmlspecialchars($message) ?></li>
+    		<?php endforeach; ?>
+    		</ul>
+    	</div>
+
+        <?php if ($_SESSION["redDragon"]->health == 0): ?>
+            <p class="victor"><span class="bold">Golem de pierre</span> est le grand vainqueur !</p>
+        <?php elseif ($_SESSION["stoneGolem"]->health == 0): ?>
+            <p class="victor"><span class="bold">Dragon rouge</span> est le grand vainqueur !</p>
+        <?php endif; ?>
+
+        <footer>
+            <p>Que le meilleur gagne entre ces créatures légendaires !</p>
+        </footer>
+    </main>
 </body>
 </html>
