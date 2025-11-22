@@ -124,3 +124,15 @@ button {
 .buttonRestart button:hover {
     background: #974003;
 }
+
+.healthBar {
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    height: 23px;
+    border-radius: 25px;
+    margin: 25px 0;
+}
+.healthFill {
+    background-color: #08CB00;
+    height: 100%;
+    border-radius: 25px;
+}

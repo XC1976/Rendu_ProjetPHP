@@ -17,6 +17,10 @@
         <div class="entitiesContainer">
             <div class="entity">
                     <h2>Dragon Rouge</h2>
+                    <div class="healthBar">
+                        <div class="healthFill" style="width:<?= $dragonPct . '%';?>">
+                        </div>
+                    </div>
                     <?= "<p>" .
                         $_SESSION["redDragon"]->health .
                         " / " .
@@ -34,6 +38,10 @@
 
             <div class="entity">
                 <h2>Golem de Pierre</h2>
+                <div class="healthBar">
+                    <div class="healthFill" style="width:<?= $golemPct . '%';?>">
+                    </div>
+                </div>
                 <?= "<p>" .
                     $_SESSION["stoneGolem"]->health .
                     " / " .

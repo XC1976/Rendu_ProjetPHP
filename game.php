@@ -41,10 +41,10 @@ class Mob
 
 // Initialize mobs if not already done
 if (!isset($_SESSION["redDragon"])) {
-    $_SESSION["redDragon"] = new Mob("Dragon Rouge", 100);
+    $_SESSION["redDragon"] = new Mob("Dragon Rouge", 150);
 }
 if (!isset($_SESSION["stoneGolem"])) {
-    $_SESSION["stoneGolem"] = new Mob("Golem de Pierre", 100);
+    $_SESSION["stoneGolem"] = new Mob("Golem de Pierre", 150);
 }
 if (!isset($_SESSION["messages"])) {
     $_SESSION["messages"] = [];
@@ -66,3 +66,12 @@ if (isset($_POST["dragonAttack"])) {
 if (isset($_POST["golemAttack"])) {
     $_SESSION["stoneGolem"]->attack($_SESSION["redDragon"]);
 }
+
+
+$dragonPct = ($_SESSION["redDragon"]->health / $_SESSION["redDragon"]->originalHealth) * 100;
+// Guard against division‑by‑zero (should never happen here)
+$dragonPct = $dragonPct < 0 ? 0 : $dragonPct;
+
+$golemPct = ($_SESSION["stoneGolem"]->health / $_SESSION["stoneGolem"]->originalHealth) * 100;
+// Guard against division‑by‑zero (should never happen here)
+$golemPct = $golemPct < 0 ? 0 : $golemPct;
