@@ -6,8 +6,7 @@ USE ipssi_db;
 CREATE TABLE USER (
     id INTEGER PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(20),
-    password VARCHAR(60),
-    admin BOOLEAN
+    password VARCHAR(60)
 );
 
 CREATE TABLE BOOK (
