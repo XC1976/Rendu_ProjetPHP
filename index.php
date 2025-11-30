@@ -81,6 +81,10 @@ use app\Models\UserModel;
                    <button type="submit" name="borrowBook">Delete book</button>
                    <input type="hidden" name="bookId" value="<?= htmlspecialchars($book["id"]); ?>" />
                </form>
+               <form action="app/Views/modifyBook.php" method="POST">
+                   <button type="submit" name="borrowBook">Modify Book</button>
+                   <input type="hidden" name="bookId" value="<?= htmlspecialchars($book["id"]); ?>" />
+               </form>
             <?php endforeach; ?>
         </section>
     </main>

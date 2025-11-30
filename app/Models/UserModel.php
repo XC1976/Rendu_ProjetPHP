@@ -129,4 +129,24 @@ class UserModel {
             return false;
         }
     }
+    
+    public function modifyBook(string $bookName, string $bookDescription, string $bookReleaseDate, int $bookId, $bdd) {
+        $verifyBookExistsReq = $bdd->prepare('SELECT id FROM BOOK WHERE id = ?');
+        $verifyBookExistsReq->execute([$bookId]);
+        $verifyBookExists = $verifyBookExistsReq->fetch();
+        
+        if(!$verifyBookExists) {
+            $_SESSION["errorMsg"] = "Le livre n'existe pas";
+            exit();
+        }
+
+        $modifyBookReq = $bdd->prepare('UPDATE BOOK SET nameBook = ?, releaseDate = ?, description = ? WHERE id = ?');
+        $success = $modifyBookReq->execute([$bookName, $bookReleaseDate, $bookDescription, $bookId]);
+        
+        if($success) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

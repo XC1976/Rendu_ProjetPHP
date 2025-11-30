@@ -72,4 +72,8 @@ class UserController
     public function deleteBook(int $bookId, $bdd) {
         return $this->userModel->deleteBook($bookId, $bdd);
     }
+    
+    public function modifyBook(string $bookName, string $bookDescription, string $bookReleaseDate, int $bookId, $bdd) {
+        return $this->userModel->modifyBook($bookName, $bookDescription, $bookReleaseDate, $bookId, $bdd);
+    }
 }
