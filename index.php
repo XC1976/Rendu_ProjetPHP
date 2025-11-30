@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 session_start();
 
@@ -43,10 +42,22 @@ use app\Models\UserModel;
 <body>
 
     <main>
+        
+        <?php
+            if(isset($_POST["logout"])) {
+            $userController->logoutUser();
+            }
+        ?>
+        
         <?php if(isset($_SESSION['user'])): ?>
             <form method="POST" action="#">
             <button type="submit" name="logout">Logout</button>
             </form>
+        <?php endif; ?>
+        
+        <?php if (isset($_SESSION["errorMsg"])): ?>
+        <p><?= $_SESSION["errorMsg"] ?></p>
+        <?php unset($_SESSION["errorMsg"]); ?>
         <?php endif; ?>
         
         <section>
@@ -56,8 +67,9 @@ use app\Models\UserModel;
                <p><?= $book["releaseDate"]; ?></p>
                <p><?= $book["description"]; ?></p>
                <?php if($book["idUser"] == NULL): ?>
-                    <form action="#" method="POST">
+                    <form action="app/Controllers/borrowHandler.php" method="POST">
                         <button type="submit" name="borrowBook">Borrow</button>
+                        <input type="hidden" name="bookId" value="<?= htmlspecialchars($book["id"]); ?>" />
                     </form>
                 <?php else: ?>
                     <p>Already borrowed</p>

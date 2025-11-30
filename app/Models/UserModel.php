@@ -28,12 +28,7 @@ class UserModel {
         $insertUser = $bdd->prepare('INSERT INTO USER(username, password) VALUES(?, ?)');
         $insertUser->execute([$username, $hashedPassword]);
         
-        // Stores relevant information into $_SESSION
-        $_SESSION['user'] = [
-            'username' => $username
-        ];
-
-        header('Location: ../../index.php');
+        header('Location: ../../app/Views/login.php');
     }
     
     public function loginUser(string $username, string $password, $bdd) {
@@ -57,7 +52,8 @@ class UserModel {
         
         // Stores the relevant information into $_SESSION
         $_SESSION['user'] = [
-            'username' => $username
+            'username' => $user["username"],
+            'id' => $user['id']
         ];
         
         // Header location to index.php
@@ -65,7 +61,7 @@ class UserModel {
     }
     
     public function listBooks($bdd) {
-        $fetchBooks = $bdd->prepare('SELECT nameBook, releaseDate, description, idUser FROM BOOK');
+        $fetchBooks = $bdd->prepare('SELECT nameBook, releaseDate, description, idUser, id FROM BOOK');
         $fetchBooks->execute();
 
         $listBooks = $fetchBooks->fetchAll();
