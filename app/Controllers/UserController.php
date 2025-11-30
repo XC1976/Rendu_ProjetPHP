@@ -52,4 +52,8 @@ class UserController
         header('Location: app/Views/register.php');
         exit();
     }
+    
+    public function listBooks($bdd) {
+        return $this->userModel->listBooks($bdd);
+    }
 }

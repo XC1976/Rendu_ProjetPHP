@@ -35,11 +35,10 @@ use app\Models\UserModel;
     <?php include $ROOTPATH . 'includes/favicon.php'; ?>
 </head>
 
-<?php if ($_SERVER["REQUEST_METHOD"] == "POST") {
+<?php
     $userController = new UserController();
-
-    $userController->logoutUser();
-} ?>
+    $listBooks = $userController->listBooks($bdd);
+?>
 
 <body>
 
@@ -49,6 +48,22 @@ use app\Models\UserModel;
             <button type="submit" name="logout">Logout</button>
             </form>
         <?php endif; ?>
+        
+        <section>
+            
+            <?php foreach($listBooks as $book): ?>
+               <p><?= $book["nameBook"]; ?></p>
+               <p><?= $book["releaseDate"]; ?></p>
+               <p><?= $book["description"]; ?></p>
+               <?php if($book["idUser"] == NULL): ?>
+                    <form action="#" method="POST">
+                        <button type="submit" name="borrowBook">Borrow</button>
+                    </form>
+                <?php else: ?>
+                    <p>Already borrowed</p>
+               <?php endif; ?>
+            <?php endforeach; ?>
+        </section>
     </main>
     
 </body>

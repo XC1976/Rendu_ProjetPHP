@@ -64,4 +64,12 @@ class UserModel {
         header('Location: ../../index.php');
     }
     
+    public function listBooks($bdd) {
+        $fetchBooks = $bdd->prepare('SELECT nameBook, releaseDate, description, idUser FROM BOOK');
+        $fetchBooks->execute();
+
+        $listBooks = $fetchBooks->fetchAll();
+
+        return $listBooks;
+    }
 }
