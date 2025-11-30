@@ -26,7 +26,20 @@ use app\Controllers\UserController;
 <body>
 
     <main>
+        <p><a href=<?= $ROOTPATH; ?>>Return to index</a></p>
         
+        <form action=<?= $ROOTPATH . 'app/Controllers/addBookHandler.php'?> method="POST">
+            <label for="bookName">Book name</label>
+            <input type="text" name="bookName" id="bookName" required />
+            
+            <label for="bookDescription">Book description</label>
+            <textarea name="bookDescription" id="bookDescription" required></textarea>
+            
+            <label for="bookReleaseDate">Date of release</label>
+            <input type="date" name="bookReleaseDate" id="bookReleaseDate" required />
+            
+            <input type="submit" name="submit" value="Add book">
+        </form>
     </main>
 
 </body>

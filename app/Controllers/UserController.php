@@ -64,4 +64,12 @@ class UserController
     public function returnBook(int $bookId, $bdd) {
         return $this->userModel->returnBook($bookId, $bdd);
     }
+    
+    public function addBook(string $bookName, string $bookDescription, string $bookReleaseDate, $bdd) {
+        return $this->userModel->addBook($bookName, $bookDescription, $bookReleaseDate, $bdd);
+    }
+    
+    public function deleteBook(int $bookId, $bdd) {
+        return $this->userModel->deleteBook($bookId, $bdd);
+    }
 }

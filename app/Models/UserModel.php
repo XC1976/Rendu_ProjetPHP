@@ -95,4 +95,38 @@ class UserModel {
             return false;
         }
     }
+    
+    public function addBook(string $bookName, string $bookDescription, string $bookReleaseDate, $bdd) {
+        // Add book
+
+        $addBookReq = $bdd->prepare('INSERT INTO BOOK(nameBook, releaseDate, description) VALUES(?, ?, ?)');
+        $success = $addBookReq->execute([$bookName, $bookReleaseDate, $bookDescription]);
+       
+        if($success) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public function deleteBook(int $bookId, $bdd) {
+        $verifyBookExistsReq = $bdd->prepare('SELECT id FROM BOOK WHERE id = ?');
+        $verifyBookExistsReq->execute([$bookId]);
+        $verifyBookExists = $verifyBookExistsReq->fetch();
+        
+        if(!$verifyBookExists) {
+            $_SESSION["errorMsg"] = "Le livre n'existe pas";
+            exit();
+        }
+        
+        // Delete book
+        $deleteBookReq = $bdd->prepare('DELETE FROM BOOK WHERE id = ?');
+        $success = $deleteBookReq->execute([$bookId]);
+        
+        if($success) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

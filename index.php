@@ -51,6 +51,7 @@ use app\Models\UserModel;
         
         <?php if(isset($_SESSION['user'])): ?>
             <p><a href=<?= $ROOTPATH . 'app/Views/borrowedBooks.php'; ?>>Your borrowed books</a></p>
+            <p><a href=<?= $ROOTPATH . 'app/Views/addBook.php'; ?>>Add a book</a></p>
         
             <form method="POST" action="#">
             <button type="submit" name="logout">Logout</button>
@@ -76,6 +77,10 @@ use app\Models\UserModel;
                 <?php else: ?>
                     <p>Already borrowed</p>
                <?php endif; ?>
+               <form action="app/Controllers/deleteHandler.php" method="POST">
+                   <button type="submit" name="borrowBook">Delete book</button>
+                   <input type="hidden" name="bookId" value="<?= htmlspecialchars($book["id"]); ?>" />
+               </form>
             <?php endforeach; ?>
         </section>
     </main>
