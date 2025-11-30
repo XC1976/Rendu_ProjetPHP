@@ -28,27 +28,33 @@ $bookController = new UserController();
 
 $listBorrowedBooks = $bookController->listBorrowedBooks(
     $_SESSION["user"]["id"],
-    $bdd
+    $bdd,
 );
 ?>
 
 <body>
 
-    <main>
+    <header>
         <p><a href=<?= $ROOTPATH . "index.php" ?>>Come back to index.php</a></p>
+    </header>
 
-        <section>
-            <?php if($listBorrowedBooks != false): ?>
+    <main>
+
+        <section class="booksContainer">
+            <?php if ($listBorrowedBooks != false): ?>
                 <?php foreach ($listBorrowedBooks as $book): ?>
-                    <p><?= htmlspecialchars($book["nameBook"]); ?></p>
-                    <p><?= htmlspecialchars($book["releaseDate"]); ?></p>
-                    <p><?= htmlspecialchars($book["description"]); ?></p>
-                    <form action=<?= $ROOTPATH . 'app/Controllers/returnHandler.php'; ?> method="POST">
-                        <button type="submit" name="returnBook">Return book</button>
-                        <input type="hidden" name="bookId" value="<?= htmlspecialchars(
-                            $book["id"],
-                        ) ?>" />
-                    </form>
+                    <div class="individualBook">
+                        <p><?= htmlspecialchars($book["nameBook"]) ?></p>
+                        <p><?= htmlspecialchars($book["releaseDate"]) ?></p>
+                        <p><?= htmlspecialchars($book["description"]) ?></p>
+                        <form action=<?= $ROOTPATH .
+                            "app/Controllers/returnHandler.php" ?> method="POST">
+                            <button type="submit" name="returnBook">Return book</button>
+                            <input type="hidden" name="bookId" value="<?= htmlspecialchars(
+                                $book["id"],
+                            ) ?>" />
+                        </form>
+                    </div>
                 <?php endforeach; ?>
             <?php endif; ?>
         </section>

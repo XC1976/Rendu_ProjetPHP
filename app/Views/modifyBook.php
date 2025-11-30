@@ -25,8 +25,11 @@ use app\Controllers\UserController;
 
 <body>
 
-    <main>
+    <header>
         <p><a href=<?= $ROOTPATH; ?>>Return to index</a></p>
+    </header>
+    
+    <main>
         
         <form action=<?= $ROOTPATH . 'app/Controllers/modifyBookHandler.php'?> method="POST">
             <label for="bookName">New Book name</label>
