@@ -66,10 +66,10 @@ use app\Models\UserModel;
         <section>
             
             <?php foreach($listBooks as $book): ?>
-               <p><?= $book["nameBook"]; ?></p>
-               <p><?= $book["releaseDate"]; ?></p>
-               <p><?= $book["description"]; ?></p>
-               <?php if($book["idUser"] == NULL): ?>
+               <p><?= htmlspecialchars($book["nameBook"]); ?></p>
+               <p><?= htmlspecialchars($book["releaseDate"]); ?></p>
+               <p><?= htmlspecialchars($book["description"]); ?></p>
+               <?php if($book["idUser"] == NULL): ?>q
                     <form action="app/Controllers/borrowHandler.php" method="POST">
                         <button type="submit" name="borrowBook">Borrow</button>
                         <input type="hidden" name="bookId" value="<?= htmlspecialchars($book["id"]); ?>" />

@@ -40,9 +40,9 @@ $listBorrowedBooks = $bookController->listBorrowedBooks(
         <section>
             <?php if($listBorrowedBooks != false): ?>
                 <?php foreach ($listBorrowedBooks as $book): ?>
-                    <p><?= $book["nameBook"] ?></p>
-                    <p><?= $book["releaseDate"] ?></p>
-                    <p><?= $book["description"] ?></p>
+                    <p><?= htmlspecialchars($book["nameBook"]); ?></p>
+                    <p><?= htmlspecialchars($book["releaseDate"]); ?></p>
+                    <p><?= htmlspecialchars($book["description"]); ?></p>
                     <form action=<?= $ROOTPATH . 'app/Controllers/returnHandler.php'; ?> method="POST">
                         <button type="submit" name="returnBook">Return book</button>
                         <input type="hidden" name="bookId" value="<?= htmlspecialchars(
