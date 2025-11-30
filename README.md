@@ -8,4 +8,5 @@
 - rendu3 : Snapshot rendu du 2025-11-23
 - rendu4 : Snapshot rendu du 2025-11-30
 
-For the sake of demonstration, the .gitignore is commented and everything is exposed.
+**For the sake of demonstration, the .gitignore is commented and everything is exposed.**
+**This is focused on practicing UML and MCD with objected-oriented programming. Additional SQL columns sucha as book image cover would be necessary in the real world but aren't providing any value for this purpose.**
