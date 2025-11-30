@@ -68,4 +68,31 @@ class UserModel {
 
         return $listBooks;
     }
+    
+    public function listBorrowedBooks(int $userId, $bdd) {
+        // Select every books borrowed from user
+        $userBorrowedBooksReq = $bdd->prepare('SELECT id, nameBook, releaseDate, description FROM BOOK WHERE idUser = ?');
+        $userBorrowedBooksReq->execute([$userId]);
+        $userBorrowedBooks = $userBorrowedBooksReq->fetchAll();
+        
+        if($userBorrowedBooks) {
+            return $userBorrowedBooks;
+        } else {
+            return false;
+        }
+    }
+    
+    public function returnBook(int $bookId, $bdd) {
+        // Return book
+        $returnBookReq = $bdd->prepare('UPDATE BOOK SET idUser = NULL WHERE id = ?');
+        $returnBookReq->execute([$bookId]);
+
+        $returnBook = $returnBookReq->rowCount();
+        
+        if($returnBook > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

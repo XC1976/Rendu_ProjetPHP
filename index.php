@@ -50,6 +50,8 @@ use app\Models\UserModel;
         ?>
         
         <?php if(isset($_SESSION['user'])): ?>
+            <p><a href=<?= $ROOTPATH . 'app/Views/borrowedBooks.php'; ?>>Your borrowed books</a></p>
+        
             <form method="POST" action="#">
             <button type="submit" name="logout">Logout</button>
             </form>

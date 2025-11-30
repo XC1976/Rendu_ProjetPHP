@@ -20,5 +20,5 @@ class BookController {
         } else {
             return false;
         }
-   } 
+   }
 }

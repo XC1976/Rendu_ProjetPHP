@@ -56,4 +56,12 @@ class UserController
     public function listBooks($bdd) {
         return $this->userModel->listBooks($bdd);
     }
+    
+    public function listBorrowedBooks(int $userId, $bdd) {
+        return $this->userModel->listBorrowedBooks($userId, $bdd);
+    }
+    
+    public function returnBook(int $bookId, $bdd) {
+        return $this->userModel->returnBook($bookId, $bdd);
+    }
 }
